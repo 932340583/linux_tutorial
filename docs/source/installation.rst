@@ -127,7 +127,9 @@ Rocky Linux系统安装
 .. image:: ./images/installation/1-15.png
     :align: center
 
-配置远程访问Rocky Linux：
+.. _remote_linux:
+
+配置远程访问Rocky Linux
 ---------------------------------
 在安装完成重启后，系统会出现如下界面：
 
