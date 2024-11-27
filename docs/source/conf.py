@@ -29,5 +29,5 @@ html_static_path = ['_static']
 
 html_theme_options = {
     'fixed_sidebar': True,
-    'pre_bg': '#F5F5F5',
+#    'pre_bg': '#F5F5F5',
 }
