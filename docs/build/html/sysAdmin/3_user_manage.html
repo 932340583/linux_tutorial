@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>用户管理与用户组管理 &#8212; Linux系统教程</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=00324847"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'sysAdmin/3_user_manage';</script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="系统环境基础设置" href="2_basic_env_config.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Linux系统教程</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">教程目录:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Rocky Linux安装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_basic_net_config.html">系统网络基础管理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_basic_env_config.html">系统环境基础设置</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">用户管理与用户组管理</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/sysAdmin/3_user_manage.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>用户管理与用户组管理</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 目录 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">用户与用户组</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">用户与用户组的概念</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">保留用户与用户组的配置</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
+<h1>用户管理与用户组管理<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Linux系统也是一个多用户操作系统 <a class="footnote-reference brackets" href="#f1" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>。在多人使用的场景下，就有可能出现权限问题：如一个文件只允许某个用户查看，另一个用户不允许查看；系统设置只允许管理员进行操作，其它用户无允许操作等等。</p>
+<section id="id3">
+<h2>用户与用户组<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>用户与用户组的管理是Linux系统管理的核心任务之一，Linux系统上有大量不同的用户与用户组，而系统内的程序也是以某个用户的身份运行的，所以用户管理相关工作不止止是管理“人”的账户。</p>
+<section id="id4">
+<h3>用户与用户组的概念<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>我们先在系统上创建一个文件，以此为支点了解Linux系统上的用户与用户组是什么样的：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>test_file
+ls<span class="w"> </span>-l
+</pre></div>
+</div>
+<img alt="../_images/2-24.png" class="align-center" src="../_images/2-24.png" />
+<p><code class="docutils literal notranslate"><span class="pre">touch</span></code> 命令是用来更新文件的创建时间、修改时间等信息的，此处被用来创建一个空的文件。<code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> 列出了文件的详细内容（可通过 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">--help</span></code> 查询ls命令的所有参数），通过这些内容来了解Linux系统的用户和用户组概念。</p>
+<p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> 依次列出了以下内容（以test_file为例）：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-rw-r--r--.</span></code>：一共10位字符，第一位表示文件类型， <strong>-</strong> 表示普通文件；后九位每三位为一组，第一组为用户权限，第二组为用户组权限，第三组为其它用户权限，rwx分别表示读写和执行权限。 <strong>.</strong> 表示文件受SELinux控制。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">root</span> <span class="pre">root</span>&#160;&#160; <span class="pre">0</span></code>：<a class="reference external" href="https://baike.baidu.com/item/%E7%A1%AC%E9%93%BE%E6%8E%A5">硬链接</a> 数量、用户名、用户组名及文件大小。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dec</span>&#160; <span class="pre">4</span> <span class="pre">14:49</span> <span class="pre">test_file</span></code>：文件修改时间和文件名。</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> 的更多信息可参考 <a class="reference external" href="https://www.gnu.org/software/coreutils/manual/html_node/What-information-is-listed.html#index-_002dl-7">官方文档</a>。</p>
+<p>通过 <code class="docutils literal notranslate"><span class="pre">test_file</span></code> 文件创建，可以了解到，Linux的用户权限有三个类别，分别是属主（owner）、属组（group owner）和其它用户（other users）；使用权限也有三个，分别是读（r/read）、写（w/write）和执行（x/execute）；还有一个额外的安全控制权限（security context） <a class="reference external" href="https://baike.baidu.com/item/SELinux">SELinux</a>。它们共同构成了Linux系统权限控制。</p>
+<p>而用户和用户组都拥有系统中唯一标识的ID，分别是UID（user ID）和GID（group ID）。执行 <code class="docutils literal notranslate"><span class="pre">id</span></code> 命令可以查看当前用户和用户所在的用户组：</p>
+<img alt="../_images/2-25.png" class="align-center" src="../_images/2-25.png" />
+<p>context是SELinux的标识。</p>
+<p>一个组内可以有多个用户，如果一个文件的属组权限是该组，该组内的用户则共享读、写和执行权限。</p>
+<p><strong>以上概念或许苍白无力，一时难以理解，不要紧的，随着对Linux系统的深入，这些概念之后会自然理解。</strong></p>
+</section>
+<section id="id7">
+<h3>保留用户与用户组的配置<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>系统为系统用户和组保留了1000以下的ID，这些保留的ID可以通过下面的命令查看：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>/usr/share/doc/setup/uidgid
+</pre></div>
+</div>
+<p>因此新用户与用户组的创建在分配ID时，会从1000开始。红帽推荐ID分配从5000开始，可以通过修改 <code class="docutils literal notranslate"><span class="pre">/etc/login.defs</span></code> 来达成此目的：</p>
+<ol class="arabic simple">
+<li><p>使用nano打开这个配置文件：<code class="docutils literal notranslate"><span class="pre">nano</span> <span class="pre">/etc/login.defs</span></code></p></li>
+<li><p>按键盘中的方向键的↓键，找到UID_MIN的配置：</p></li>
+</ol>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Min/max values for automatic uid selection in useradd(8)</span>
+<span class="c1">#</span>
+UID_MIN<span class="w">                  </span><span class="mi">1000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>将UID_MIN的值更改为5000</p></li>
+</ol>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Min/max values for automatic uid selection in useradd(8)</span>
+<span class="c1">#</span>
+UID_MIN<span class="w">                  </span><span class="mi">5000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>继续按↓键打到GID_MIN的配置</p></li>
+</ol>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Min/max values for automatic gid selection in groupadd(8)</span>
+<span class="c1">#</span>
+GID_MIN<span class="w">                  </span><span class="mi">1000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>将GID_MIN的值更改为5000</p></li>
+</ol>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Min/max values for automatic gid selection in groupadd(8)</span>
+<span class="c1">#</span>
+GID_MIN<span class="w">                  </span><span class="mi">5000</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>按下Ctrl+X键退出编辑，输入Y保存修改，然后按下回车键保存到文件中</p></li>
+</ol>
+<p>之后在新建用户与用户组时，系统会为它们分配5000之后的ID</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p><code class="docutils literal notranslate"><span class="pre">/etc/login.defs</span></code> 中的其它配置项在不理解的情况下不要随意修改，该文件是系统配置文件，随意修改可能会导致系统产生意外问题。</p>
+</div>
+<p class="rubric">脚注</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="f1" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>即一个操作系统可同时供多人使用</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_basic_env_config.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">系统环境基础设置</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 目录
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">用户与用户组</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">用户与用户组的概念</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">保留用户与用户组的配置</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+作者： 程亮
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, 程亮.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -24,10 +24,6 @@ language = 'zh_CN'
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
-
-html_theme_options = {
-    'fixed_sidebar': True,
-#    'pre_bg': '#F5F5F5',
-}
+html_title = "Linux系统教程"
