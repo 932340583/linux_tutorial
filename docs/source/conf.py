@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Linux系统教程'
-copyright = '2024, 程亮'
+copyright = '2025, 程亮'
 author = '程亮'
-release = '20241025'
+release = '20250214'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
