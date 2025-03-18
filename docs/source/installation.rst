@@ -159,6 +159,11 @@ Rocky Linux系统安装
 .. image:: ./images/installation/1-19.png
     :align: center
 
+.. hint:: 
+
+    ``ip`` 是一个命令，它的作用是查看网络配置信息， ``a`` 是 ``address`` 的缩写，意为\
+    获取ip地址。
+
 上图红框处便是ip地址，打开xshell，在弹出来的菜单中点击新建：
 
 .. image:: ./images/installation/1-20.png
@@ -190,8 +195,32 @@ Rocky Linux系统安装
 .. image:: ./images/installation/1-25.png
     :align: center
 
-最后我们成功通过xshell登录到虚拟机中的Rocky Linux系统中：
+最后我们成功通过xshell登录到虚拟机中的Rocky Linux系统中，出现如下的命令行界面：
 
 .. image:: ./images/installation/1-26.png
     :align: center
 
+如果要关闭虚拟机中的Rocky Linux系统，可以在命令行中执行如下命令，也就是Xshell中：
+
+.. code:: shell
+
+    shutdown -h now
+
+.. image:: ./images/installation/1-28.png
+    :align: center
+
+.. hint:: 
+
+    shutdown命令用于关闭操作系统，这是我们在命令行下第一要学到的命令。
+
+    命令行下的命令多数遵循 ``命令+选项+参数`` 的格式，比如：
+
+    ``shutdown`` 是命令， ``-h`` 是选项，``now`` 可以理解为参数。通过 ``shutdown --help`` \
+    可以获取到完整的选项说明：
+
+    .. image:: ./images/installation/1-27.png
+        :align: center
+
+    后续在学习Linux过程中，会有更多的命令，会陆续介绍。
+
+    
