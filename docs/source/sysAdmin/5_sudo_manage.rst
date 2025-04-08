@@ -255,8 +255,8 @@ sudoers文件授权实战
 
     # 安装postfix服务
     dnf install -y postfix
-    # 启动postfix服务
-    systemctl start postfix
+    # 启动postfix服务并设置开机启动
+    systemctl enable --now postfix
 
 **验证sudo授权是否有问题**
 
