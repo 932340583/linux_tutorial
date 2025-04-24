@@ -355,6 +355,10 @@ user owner(u)、group owner(g)和others(o)的权限。
 .. image:: ../images/sysAdmin/6_file/1-7-1.png
     :align: center
 
+.. hint:: 
+
+  通过 ``man chown`` 了解更多信息。
+
 管理umask
 -------------------------
 基础权限与 ``umask`` 的组合就是默认权限，而 ``umask`` 是可以被更改的，我们可以通过 ``umask`` 命令来\
@@ -794,4 +798,6 @@ sticky bit是用来防止他人删除或重命名自己的文件：
    .. hint::
 
     当ACLs被删除后， ``ls -dl test_acl`` 命令的输出结果中就没有 ``+`` 了，它不再有额外的访问权限控制了。
+
+    通过 ``man setfacl`` 和 ``man getfacl`` 了解更多信息。
 

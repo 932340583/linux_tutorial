@@ -16,7 +16,7 @@ CentOS曾是著名的RedHat Linux下游社区发行版，但其后 `改变更新
 的测试品。众人不得不寻找其它替代品，不过好在CentOS项目的联合创建人之一 **Gregory Kurtzer** \
 又创建了 `Rocky Linux`_ 用来替代CentOS。
 
-.. _改变更新发行: https://baike.baidu.com/item/CentOS/498948#4
+.. _改变更新发行: https://baike.baidu.com/item/CentOS/498948
 .. _Rocky Linux: https://rockylinux.org/
 
 本教程使用Rocky Linux进行教学，RedHat Linux有着丰富的技术文档，同时系统也非常稳定性。因此它的下游\
