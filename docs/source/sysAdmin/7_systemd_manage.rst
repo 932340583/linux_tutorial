@@ -317,7 +317,7 @@ target在 ``systemd`` 中是由彼此关联的系统服务的unit组成的集合
 常见的systemd targets如下：
 
 - ``multi-user.target`` ：设置一个多用户环境的系统
-- ``graphical.target`` ：设置一个图形化环境的系统，像windows操作系统一样，可以通过图形界面来操作
+- ``graphical.target`` ：设置一个图形化环境的系统，像windows操作系统一样，可以通过图形界面来操作（图形化界面需要安装对应软件包）
 - ``emergency.target`` ：设置一个紧急模式的系统，会在控制台中启动一个shell，让用户可以进行系统维护，不会启动其它服务
 
 .. _D-Bus: https://baike.baidu.com/item/dbus/17507523
@@ -684,6 +684,48 @@ target在 ``systemd`` 中是由彼此关联的系统服务的unit组成的集合
     :align: center
 
   可在这里修改配置，体验该项特性。
+
+系统运行级别
+--------------------------------
+系统运行级别是 `system V`_ 的概念，它是上一代Linux系统的系统服务管理软件，\
+``systemd`` 提供了一个兼容层来使target与 ``system V`` 中的运行级别一一对应：
+
+.. _system V: https://baike.baidu.com/item/System%20V/1376562
+
+============ ==========================
+Runlevel      Target
+============ ==========================
+0             ``poweroff.target``
+1             ``rescue.target``
+2,3,4         ``multi-user.target``
+5             ``graphical.target``
+6             ``reboot.target``
+============ ==========================
+
+.. note:: 
+
+  * 2： 无网络的多用户模式
+  * 3： 完整的多用户模式
+  * 4： 自定义模式
+
+可以使用 ``runlevel`` 命令来查看当前的系统运行级别：
+
+.. code:: shell
+
+    runlevel
+
+它会输出之前的系统运行级别和当前的系统运行级别，如未发生过级别切换，前一个级别会输出 ``N`` 。
+
+对于级别切换，可以使用 ``init`` 命令来进行，如：
+
+.. code:: shell
+
+    init 6
+
+它与 ``systemctl isolate reboot.target`` 命令的效果相同，会让系统立即进行重启。
+
+.. image:: ../images/sysAdmin/7_systemd/1-28.png
+    :align: center
 
 .. rubric:: 脚注
 
