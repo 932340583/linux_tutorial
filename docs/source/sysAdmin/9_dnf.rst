@@ -167,6 +167,12 @@ Linux软件仓库中有成千上万个软件包，如何快速搜索和查看自
 
     dnf provides vim
 
+  使用通配符进行更深度的搜索：
+
+  .. code:: shell
+
+    dnf provides "*/vim"
+
 列出软件包
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 ``dnf`` 可以列出所有的软件包，还可以对结果进行过滤，如只列出某个仓库的软件包、只列出可升级的软件包等。
@@ -682,6 +688,8 @@ dnf回退
 
   更多参数可参见 ``man dnf.conf`` 中的 ``REPO OPTIONS`` 及以下的内容。
 
+.. _add_repo:
+
 添加软件仓库
 ^^^^^^^^^^^^^^^^^^^^^^^
 系统中自带的nginx软件版本较低，但nginx官方提供了最新版本的软件包，我们可以通过添加软件仓库，\
@@ -743,17 +751,73 @@ nginx共提供了两个版本的软件仓库，一个是稳定版，一个是主
     # 安装最新版本的nginx
     dnf install nginx
 
+应用版本管理
+------------------------
+``appstream`` 软件仓库中对于某一个软件会提供多个版本，系统默认安装的版本有时并不是最新的。
 
+要查看这类内容，可使用以下命令：
+
+.. code:: shell
+
+  dnf module list
+
+.. image:: ../images/sysAdmin/9_dnf/1-15.png
+    :align: center
+
+作为对比，可以查看系统中提供的 `php`_ 版本：
+
+.. _php: https://baike.baidu.com/item/PHP/9337
+
+.. code:: shell
+
+  dnf info php
+
+.. image:: ../images/sysAdmin/9_dnf/1-16.png
+    :align: center
+
+可以看到，系统默认提供的php版本是8.0.30，而 ``appstream`` 软件仓库中提供的php版本有8.1和8.2两\
+个更高的版本。
+
+版本切换
+^^^^^^^^^^^^^^^^^^^^^^^
+如果想要使用更高版本的php，就需要将系统中可用的php版本切换到更高版本，如切换到8.2版本：
+
+.. code:: shell
+
+  dnf module enable php:8.2
+
+.. note:: 
+
+  切换版本是以应用加版本号为目标的，如上述的php，就是 ``php:8.2`` , 其它 ``dnf module list`` 中\
+  的应用都是按此方式来切换可用版本的。
+
+切换完成后，此时再查看系统中提供的php版本：
+
+.. code:: shell
+
+  dnf info php
+
+.. image:: ../images/sysAdmin/9_dnf/1-17.png
+    :align: center
+
+原本系统默认提供的php版本是8.0，此时已经变为了8.2了。
+
+重置版本
+^^^^^^^^^^^^^^^^^^^^^^^
+如果想要将系统中可用的php版本重置为默认版本，可使用以下命令：
+
+.. code:: shell
+
+  dnf module reset php
+
+此时系统中提供的php版本又变回了8.0了。
+
+.. hint:: 
+
+  更多关于版本管理的内容可参见 ``man dnf`` 中的 ``Module Command`` 中的内容。
 
 .. rubric:: 脚注
 
 .. [#f1] 开源软件通常会通过镜像站点（即与主网站中提供的下载内容一致）来分发软件包，以便减少\
     主站的下载压力；同时镜像站点会分布在世界各地，用户可以根据自己的地理位置选择离自己最近的\
     镜像站点进行下载，以提高下载速度。
-
-
-
-    
-
-
-

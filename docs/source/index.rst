@@ -25,7 +25,7 @@ CentOS曾是著名的RedHat Linux下游社区发行版，但其后 `改变更新
 在熟悉了某一个发行版的Linux之后，其它版本的Linux也可轻松驾驭。
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: 教程目录:
    :glob:
 
